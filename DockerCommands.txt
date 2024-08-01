@@ -1,0 +1,11 @@
+build the Docker image using the following command:
+
+docker build -t invoice-system .
+
+
+Run the Docker container using the following command:
+
+docker run --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix invoice-system
+
+
+
