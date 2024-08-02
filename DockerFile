@@ -1,14 +1,24 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
+# Set environment variable for non-interactive installs
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Set the working directory in the container
 WORKDIR /usr/src/app
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    python3-tk \
+    xauth \
+    x11-apps \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
-# Install the necessary packages
-RUN pip install sqlalchemy tkinter
+# Install the necessary Python packages
+RUN pip install sqlalchemy
 
 # Run the application
 CMD ["python", "invoice_system_gui.py"]
